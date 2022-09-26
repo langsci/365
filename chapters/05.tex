@@ -15,7 +15,7 @@ The present study follows the implementational basics outlined in Section \ref{s
 The pseudowords and their phonetic realisations that this study is based on are taken from the study of word-final /s/ production presented in Chapter \ref{chapter04}. As linear discriminative learning (e.g. \cite{Baayen2019}) in its current implementation does not offer the option to integrate clitics, the pseudoword set for the present study was limited to two types of /s/: non-morphemic and plural /s/. Recall that some pseudowords showed a number of different realisations by the participants in the production experiment, e.g. \textit{prups} was sometimes produced as /pɹʌps/ and sometimes as /pɹups/. Thus, not 48 (i.e. the number of pseudowords in their orthographic representation) but 78 different phonological forms were included in the pseudoword data set. Table \ref{tab:5.1} gives an overview of all pseudowords and their phonological forms.
 
 \begin{table}\fontsize{9}{10}
-\caption{Overview of all pseudowords and their phonological forms used in the LDL implementation. Transcriptions are given in the DISC keyboard phonetic alphabet (\cite{Burnage1988})}
+\caption{Overview of all pseudowords and their phonological forms used in the LDL implementation. Transcriptions are given in the DISC keyboard phonetic alphabet (\cite{Burnage1988}).}
 \label{tab:5.1}
 \centering
 \begin{tabular}{llllll} 
@@ -65,19 +65,19 @@ to obtain $F$. Then, one can make use of the pseudoword cue matrix $C_{pw}$ and 
     S_{pw}=C_{pw}F
 \end{equation}
 
-with $S_{pw}$ denoting the originally estimated semantic matrix for pseudowords. In this semantic matrix, pseudowords of identical segmental makeup show identical semantics, as semantics are calculated only based on triphone occurrence, i.e. the semantics of \textit{pleeps\textsubscript{singular}} is identical to the semantics of \textit{pleeps\textsubscript{plural}}. To differentiate between singular and plural pseudowords, the semantic vector of the \textsc{plural} lexome is added to all plural pseudowords in the $S$ matrix. Similarly, the semantic vectors of \textsc{alien} and \textsc{creature} are added to all pseudoword semantic vectors as participants in the original production experiment were told that pseudowords describe alien creatures. As explained in Section \ref{section04_1}, the pairing of the pictures with pseudowords representing the alien creatures was randomised during the experiment. A particular pseudoword thus only contained the semantics of ``alien creature" as a constant part of its own semantics, while other factors such as appearance, e.g. colour, shape, or number of eyes, differed across participants. One may assume that in the course of the experiment, participants gradually came to realise that the looks of these alien creatures, i.e. colour, shape, etc., are not relevant to their label names. Thus, participants were just aware of the fact that these are all alien creatures, without paying much attention to their individual features. Please see the \ref{Supplementary Material} for a detailed implementation.
+with $S_{pw}$ denoting the originally estimated semantic matrix for pseudowords. In this semantic matrix, pseudowords of identical segmental makeup show identical semantics, as semantics are calculated only based on triphone occurrence, i.e. the semantics of \textit{pleeps\textsubscript{singular}} is identical to the semantics of \textit{pleeps\textsubscript{plural}}. To differentiate between singular and plural pseudowords, the semantic vector of the \textsc{plural} lexome is added to all plural pseudowords in the $S$ matrix. Similarly, the semantic vectors of \textsc{alien} and \textsc{creature} are added to all pseudoword semantic vectors as participants in the original production experiment were told that pseudowords describe alien creatures. As explained in Section \ref{section04_1}, the pairing of the pictures with pseudowords representing the alien creatures was randomised during the experiment. A particular pseudoword thus only contained the semantics of ``alien creature" as a constant part of its own semantics, while other factors such as appearance, e.g. colour, shape, or number of eyes, differed across participants. One may assume that in the course of the experiment, participants gradually came to realise that the looks of these alien creatures, i.e. colour, shape, etc., are not relevant to their label names. Thus, participants were just aware of the fact that these are all alien creatures, without paying much attention to their individual features. Please see the supplementary material given in Chapter \ref{Supplementary Material} for a detailed implementation.
 
 \subsection{Comprehension and production}\label{section05_1_5}
 
 Pseudoword comprehension and production were not computed and evaluated in isolation, but in combination with real words, simulating a real person’s lexicon in a pseudoword comprehension and production situation, respectively. For this, a cue matrix $C_{comb}$ was created based on a combined set of words, containing all aforementioned real words and pseudowords. In total, 8,440 word forms were part of this set of words. A combined semantic matrix $S_{comb}$ was created by attaching $S_{pw}$ to $S_{rw}$, and reordering its rows to reflect the same order of words as found in $C_{comb}$ using the \texttt{LDLConvFunction} package (\cite{Schmitz2021ldlconv}).
 
-Then, using the \texttt{WpmWithLdl} package (\cite{Baayen2019wpm}), a comprehension model was trained and checked for accuracy. That is, taking form vectors as input for the prediction of semantic vectors of output, $\hat{S}_{comb}=C_{comb}F$ is solved. Comprehension is successfully modelled for a word $i$ if its predicted semantic vector $\hat{s_i}$ is most highly correlated with its targeted semantic vector $s_i$. This is true for 74.41 \% of cases (i.e. 6,165 word forms) in the comprehension model. In total, 25.59 \% of cases (i.e. 2,120 word forms) were incorrectly predicted, with 1,912 simple and 208 complex word forms. None of the incorrectly predicted word forms was a pseudoword.
+Then, using the \texttt{WpmWithLdl} package (\cite{Baayen2019wpm}), a comprehension model was trained and checked for accuracy. That is, taking form vectors as input for the prediction of semantic vectors of output, $\hat{S}_{comb}=C_{comb}F$ is solved. Comprehension is successfully modelled for a word $i$ if its predicted semantic vector $\hat{s_i}$ is most highly correlated with its targeted semantic vector $s_i$. This is true for 74.41\% of cases (i.e. 6,165 word forms) in the comprehension model. In total, 25.59\% of cases (i.e. 2,120 word forms) were incorrectly predicted, with 1,912 simple and 208 complex word forms. None of the incorrectly predicted word forms was a pseudoword.
 
-Similarly, a production model was trained and checked for accuracy using functions of the aforementioned R package. Thus, semantic vectors were provided as input to predict form vectors as output, i.e. to solve $\hat{T}_{comb}=S_{comb}G$. Production was successfully modelled for a word $i$ if its predicted triphones are those triphones present in its targeted cue vector in the correct sequence (possible sequences of triphones will be referred to below as ``paths"). This was true for 97.3 \% of cases (i.e. 8,061 word forms) in the production model. In total, 2.7 \% of cases (i.e. 224 word forms) were incorrectly predicted, with 98 simple and 126 complex word forms. None of the incorrectly predicted word forms was a pseudoword.
+Similarly, a production model was trained and checked for accuracy using functions of the aforementioned R package. Thus, semantic vectors were provided as input to predict form vectors as output, i.e. to solve $\hat{T}_{comb}=S_{comb}G$. Production was successfully modelled for a word $i$ if its predicted triphones are those triphones present in its targeted cue vector in the correct sequence (possible sequences of triphones will be referred to below as ``paths"). This was true for 97.3\% of cases (i.e. 8,061 word forms) in the production model. In total, 2.7\% of cases (i.e. 224 word forms) were incorrectly predicted, with 98 simple and 126 complex word forms. None of the incorrectly predicted word forms was a pseudoword.
 
 \subsection{Measures}\label{section05_1_6}
 
-In order to explore the potential of different measures emerging from the network to predict phonetic duration, a whole range of measures, based on the measures introduced by the \texttt{WpmWithLdl} package (\cite{Baayen2019wpm}) and by \citet{Chuang2021}, were extracted. The measures introduced by \citet{Chuang2021} were extracted using the \texttt{LDLConvFunction} package (\cite{Schmitz2021ldlconv}). Please see the \ref{Supplementary Material} for exploratory analyses of individual measures.
+In order to explore the potential of different measures emerging from the network to predict phonetic duration, a whole range of measures, based on the measures introduced by the \texttt{WpmWithLdl} package (\cite{Baayen2019wpm}) and by \citet{Chuang2021}, were extracted. The measures introduced by \citet{Chuang2021} were extracted using the \texttt{LDLConvFunction} package (\cite{Schmitz2021ldlconv}). Please see the supplementary material given in Chapter \ref{Supplementary Material} for exploratory analyses of individual measures.
 
 In the following, the semantic measures are described first. Then, the phonetic measures are introduced.
 
@@ -103,7 +103,7 @@ In the following, the semantic measures are described first. Then, the phonetic 
 
 \section{Analysis}\label{section05_2}
 
-Recall that the data set of the production study (Chapter \ref{chapter04}) contains non-morphe-mic, plural, and clitic word-final /s/ as final segment of a pseudoword. As mentioned in Section \ref{section05_1_2}, the present LDL implementation does not include information on clitics. Thus, only durational data on non-morphemic and plural /s/ for the present study are considered. A subset of 666 data points remains, with 303 observations with non-morphemic /s/ and 363 observations with plural /s/. Due to some variable pronunciations requiring triphones not included in the present LDL implementation, 13 data points had to be excluded, resulting in a final data set with non-morphemic and plural /s/ durations of 653 data points, i.e. 300 entries on non-morphemic /s/ and 353 entries on plural /s/. The data set and the following analysis can be found in the \ref{Supplementary Material}.
+Recall that the data set of the production study (Chapter \ref{chapter04}) contains non-morphe-mic, plural, and clitic word-final /s/ as final segment of a pseudoword. As mentioned in Section \ref{section05_1_2}, the present LDL implementation does not include information on clitics. Thus, only durational data on non-morphemic and plural /s/ for the present study are considered. A subset of 666 data points remains, with 303 observations with non-morphemic /s/ and 363 observations with plural /s/. Due to some variable pronunciations requiring triphones not included in the present LDL implementation, 13 data points had to be excluded, resulting in a final data set with non-morphemic and plural /s/ durations of 653 data points, i.e. 300 entries on non-morphemic /s/ and 353 entries on plural /s/. The data set and the following analysis can be found in the supplementary material given in Chapter \ref{Supplementary Material}.
 
 \subsection{Covariates}\label{section05_2_1}
 
@@ -148,7 +148,7 @@ All of the following analyses make use of the following non-lexical covariates: 
 An overview of all variables is given in Table \ref{tab:5.2} and Table \ref{tab:5.3}.
 
 \begin{table}\fontsize{10}{11}
-\caption{Summary of the dependent variable and the numerical variables used in the modelling processes}
+\caption{Summary of the dependent variable and the numerical variables used in the modelling processes.}
 \label{tab:5.2}
 \centering
 \begin{tabular}{lrrrr} 
@@ -176,7 +176,7 @@ Numerical variables & Mean   & St. Dev. & Min     & Max     \\
 
 
 \begin{table}\fontsize{10}{11}
-\caption{Summary of categorical predictors and the explanatory variable of interest in the final data set}
+\caption{Summary of categorical predictors and the explanatory variable of interest in the final data set.}
 \label{tab:5.3}
 \centering
 \begin{tabular}{ll}
@@ -212,14 +212,14 @@ This model is meant to resemble those in previous studies on word-final /s/ dura
 
 Then, variance inflation factors (VIFs) were checked. The covariates \textsc{biphone-Prob} and \textsc{preC} showed high VIF values (i.e. $46.53$ and $46.88$, respectively), indicating potential overfitting of the model (e.g. \cite{Zuur2010, Fox2019}). Consequently, \textsc{preC} was removed from the model as it showed the highest VIF value, following the procedure described by \citet{Zuur2010}. Re-fitting the model without \textsc{preC} and re-checking the new variance inflation factor values revealed only non-problematic values. 
 
-Finally, the resulting model’s residuals were trimmed, following the reasoning given in Section \ref{section03_2_1}. This procedure led to a loss of 4 data points, i.e. 0.61 \% of all data points.
+Finally, the resulting model’s residuals were trimmed, following the reasoning given in Section \ref{section03_2_1}. This procedure led to a loss of 4 data points, i.e. 0.61\% of all data points.
 
 \subsection{Model B: LDL measures and \textsc{typeOfS} specification}\label{section05_2_5}
 
 This model makes use of all LDL measures as well as of the \textsc{typeOfS} variable. Additionally, the non-lexical covariates are included. When fitting a model with such a multitude of variables, collinearity is an issue to consider. Following the procedure given in Section \ref{section03_2_3}, all covariates were checked for correlation using the \texttt{SfL} package (\cite{Schmitz2021sfl}). This correlation check resulted in eight correlation coefficients indicating a high degree of correlation, for which the threshold was assumed to be $|rho|≥0.5$. The pairs of correlated covariates as well as their correlation coefficients are given in Table \ref{tab:5.4}.
 
 \begin{table}\fontsize{10}{11}
-\caption{Correlated variables and their correlation coefficients}
+\caption{Correlated variables and their correlation coefficients.}
 \label{tab:5.4}
 \centering
 \begin{tabular}{llrllr} 
@@ -236,10 +236,10 @@ Variables       & ~               & \textit{rho} & Variables       & ~       & \
 
 Due to the high number of correlated variables, a principal component analysis was used (PCA; see Section \ref{section03_2_3} for further details) to address collinearity issues. In a PCA, the dimensionality of the data is reduced by transforming the included variables into principal components. These transformations result in linear combinations of the predictors that are orthogonal to each other. Thus, the resulting principal components are not correlated. All variables given in Table \ref{tab:5.4} were included in the computation of the principal component analysis, which yielded nine principal components. 
 
-The next step of the PCA is to determine how many of these principal components are meaningful and thus should be retained for further use. Following the criteria given in Section \ref{section03_2_3}, the following was found. First, any component that displays an Eigenvalue greater than $1$ accounts for a greater amount of variance than had been contributed by one variable. Such a component is therefore potentially meaningful. This is true for components 1, 2, and 3. Second, one should retain enough components so that the cumulative percentage of variance explained is equal to at least 80 \%. This, again, is true for components 1, 2, and 3. Third, only interpretable components are to be retained. This, once again, is true for components 1, 2, and 3. Therefore, components 1 to 3 are retained for further analysis, all of which show an Eigenvalue greater than $1$, account for more than 80 \% of variance, and contain strong representations of variables in their loadings.\footnote{In addition, a cluster analysis was performed. This analysis revealed clusters which align well with the retained components of the principal component analysis. The cluster analysis can be found in the \ref{Supplementary Material}.} But what do these principal components mean? The highest loadings of the principal components, i.e. the correlation of the original variables to the pertinent component, are given in Table \ref{tab:5.5}.
+The next step of the PCA is to determine how many of these principal components are meaningful and thus should be retained for further use. Following the criteria given in Section \ref{section03_2_3}, the following was found. First, any component that displays an Eigenvalue greater than $1$ accounts for a greater amount of variance than had been contributed by one variable. Such a component is therefore potentially meaningful. This is true for components 1, 2, and 3. Second, one should retain enough components so that the cumulative percentage of variance explained is equal to at least 80\%. This, again, is true for components 1, 2, and 3. Third, only interpretable components are to be retained. This, once again, is true for components 1, 2, and 3. Therefore, components 1 to 3 are retained for further analysis, all of which show an Eigenvalue greater than $1$, account for more than 80\% of variance, and contain strong representations of variables in their loadings.\footnote{In addition, a cluster analysis was performed. This analysis revealed clusters which align well with the retained components of the principal component analysis. The cluster analysis can be found in the supplementary material given in Chapter \ref{Supplementary Material}.} But what do these principal components mean? The highest loadings of the principal components, i.e. the correlation of the original variables to the pertinent component, are given in Table \ref{tab:5.5}.
 
 \begin{table}\fontsize{10}{11}
-\caption{Loadings of original predictor variables in the three retained principal components of the principal component analysis for model B}
+\caption{Loadings of original predictor variables in the three retained principal components of the principal component analysis for model B.}
 \label{tab:5.5}
 \centering
 \begin{tabular}{lrrr} 
@@ -275,7 +275,7 @@ This model uses all LDL measures but does not incorporate the \textsc{typeOfS} c
 
 Linear mixed-effects regression models were fitted according to the procedure given in Section \ref{section03_2_1}. That is, an initial full model was fitted with the following variables: \textsc{l1norm}, \textsc{ALDC}, \textsc{support}, \textsc{density}, \textsc{ALC}, \textsc{EDNN}, \textsc{NNC}, \textsc{baseDurLog}, \textsc{speakingRate}, \textsc{pauseBin}, \textsc{folType}, \textsc{preC} and \textsc{real}. As for random effects, random intercepts for \textsc{gender}, \textsc{location}, \textsc{monoMultilingual}, \textsc{age}, \textsc{list}, and \textsc{speaker} were included. The dependent variable, duration of /s/, again was log-transformed.
 
-This full model was then continuously reduced through step-wise exclusion of non-significant variables, following the aforementioned procedure. Then, variance inflation factors were computed, resulting only in non-problematic values. Finally, the resulting model needed trimming of its residuals. This procedure led to a loss of 8 data points, i.e. 1.2 \% of all data points.
+This full model was then continuously reduced through step-wise exclusion of non-significant variables, following the aforementioned procedure. Then, variance inflation factors were computed, resulting only in non-problematic values. Finally, the resulting model needed trimming of its residuals. This procedure led to a loss of 8 data points, i.e. 1.2\% of all data points.
 
 \section{Results}\label{section05_3}
 
@@ -284,7 +284,7 @@ This full model was then continuously reduced through step-wise exclusion of non
 The final model of traditional measures included effects of the following variables: type of /s/ (\textsc{typeOfS}), speaking rate (\textsc{speakingRate}), log-transformed base duration (\textsc{baseDurLog}), pause (\textsc{pauseBin}), following segmental type (\textsc{folType}), and the summed biphone probability (\textsc{biphoneProbSumBin}). As for random effects, random intercepts for \textsc{speaker} and random slopes for \textsc{typeOfS} are included. The \textit{p}-values of the analysis of variance of the final model are given in Table \ref{tab:5.6}.
 
 \begin{table}\fontsize{10}{11}
-\caption{\textit{p}-values of fixed effects in model A, fitted to the log-transformed durations of /s/}
+\caption{\textit{p}-values of fixed effects in model A, fitted to the log-transformed durations of /s/.}
 \label{tab:5.6}
 \centering
 \begin{tabular}{lrrrrrr} 
@@ -301,12 +301,12 @@ The final model of traditional measures included effects of the following variab
 \end{tabular}
 \end{table}
 
-The marginal R\textsuperscript{2} value of the model is $0.43$, i.e. fixed effects explain 43 \% of variation in the data (see Section \ref{section03_2_1} for details on R\textsuperscript{2} values). Taking random effects into account as well, the conditional R\textsuperscript{2} value is $0.62$. That is, the model explains 62 \% of data variation in total. The R\textsuperscript{2} values are similar to the values found for the final model of the production experiment (see Section \ref{section04_3_1}).
+The marginal R\textsuperscript{2} value of the model is $0.43$, i.e. fixed effects explain 43\% of variation in the data (see Section \ref{section03_2_1} for details on R\textsuperscript{2} values). Taking random effects into account as well, the conditional R\textsuperscript{2} value is $0.62$. That is, the model explains 62\% of data variation in total. The R\textsuperscript{2} values are similar to the values found for the final model of the production experiment (see Section \ref{section04_3_1}).
 
 The estimates of the final model and their \textit{p}-values are given in Table \ref{tab:5.7}. The reference levels for the categorical predictors are: for \textsc{typeOfS} it is \texttt{nm}, for \textsc{pauseBin} it is \texttt{no\_pause}, for \textsc{biphoneProbSumBin} it is \texttt{high}, and for \textsc{folType} it is \texttt{APP}.
 
 \begin{table}\fontsize{10}{11}
-\caption{Fixed-effect coefficients and \textit{p}-values as computed for model A (mixed-effects model fitted to the log-transformed duration of /s/)}
+\caption{Fixed-effect coefficients and \textit{p}-values as computed for model A (mixed-effects model fitted to the log-transformed duration of /s/).}
 \label{tab:5.7}
 \centering
 \begin{tabular}{lrrrrr} 
@@ -338,7 +338,7 @@ The predictor strength of individual covariates was checked by taking the final 
 In the final model including LDL measures as well as the \textsc{typeOfS} covariate as parts of the individual components resulting from the principal component analysis and fitted according to the procedure described in Section \ref{section03_2_1}, one finds effects of the first principal component (\textsc{Component1}), the third principal component (\textsc{Component3}), \textsc{density}, \textsc{ALC}, base duration (\textsc{baseDurLog}), following pause (\textsc{pauseBin}), following segmental type (\textsc{folType}), and preceding consonant (\textsc{preC}). Regarding random effects, only a \textsc{speaker}-specific random intercept turned out to significantly improve model fit. The \textit{p}-values of the analysis of variance of the final model are given in Table \ref{tab:5.8}.
 
 \begin{table}\fontsize{10}{11}
-\caption{\textit{p}-values of fixed effects in model B, fitted to the log-transformed durations of /s/}
+\caption{\textit{p}-values of fixed effects in model B, fitted to the log-transformed durations of /s/.}
 \label{tab:5.8}
 \centering
 \begin{tabular}{lrrrrrr} 
@@ -357,12 +357,12 @@ In the final model including LDL measures as well as the \textsc{typeOfS} covari
 \end{tabular}
 \end{table}
 
-The marginal R\textsuperscript{2} value of the final model is $0.42$, thus fixed effects explain 42 \% of the variation in the data. The conditional R\textsuperscript{2} value of the final model is $0.60$, that is fixed and random effects taken together explain 60 \% of variation.
+The marginal R\textsuperscript{2} value of the final model is $0.42$, thus fixed effects explain 42\% of the variation in the data. The conditional R\textsuperscript{2} value of the final model is $0.60$, that is fixed and random effects taken together explain 60\% of variation.
 
 The estimates of the final model and their \textit{p}-values are given in Table \ref{tab:5.9}. The reference levels for the categorical predictors are: for \textsc{pauseBin} it is \texttt{no\_pause}, for \textsc{folType} it is \texttt{APP}, and for \textsc{preC} it is \texttt{f}.
 
 \begin{table}\fontsize{10}{11}
-\caption{Fixed-effect coefficients and \textit{p}-values as computed for model B (mixed-effects model fitted to the log-transformed duration of /s/)}
+\caption{Fixed-effect coefficients and \textit{p}-values as computed for model B (mixed-effects model fitted to the log-transformed duration of /s/).}
 \label{tab:5.9}
 \centering
 \begin{tabular}{lrrrrr} 
@@ -398,7 +398,7 @@ Figure \ref{fig:5_1} shows the effect on /s/ duration of the numerical variables
 \begin{figure}
     \centering
     \includegraphics[]{figures/fig5.1.pdf}
-    \caption{Partial effects of the numerical variables \textsc{Component1} (Panel A), \textsc{Component3} (Panel B), \textsc{density} (Panel C), \textsc{ALC} (Panel D), and \textsc{baseDurLog} (back-transformed, Panel E) included in model B, fitted to the log-transformed values of duration of /s/}
+    \caption{Partial effects of the numerical variables \textsc{Component1} (Panel A), \textsc{Component3} (Panel B), \textsc{density} (Panel C), \textsc{ALC} (Panel D), and \textsc{baseDurLog} (back-transformed, Panel E) included in model B, fitted to the log-transformed values of duration of /s/.}
     \label{fig:5_1}
 \end{figure}
 
@@ -407,7 +407,7 @@ The partial effects of the categorical variables included in the final model are
 \begin{figure}
     \centering
     \includegraphics[]{figures/fig5.2.pdf}
-    \caption{Partial effects of the categorical variables \textsc{pauseBin} (Panel A), \textsc{folType} (Panel B), and \textsc{preC} (Panel C) included in model B, fitted to the log-transformed values of duration of /s/}
+    \caption{Partial effects of the categorical variables \textsc{pauseBin} (Panel A), \textsc{folType} (Panel B), and \textsc{preC} (Panel C) included in model B, fitted to the log-transformed values of duration of /s/.}
     \label{fig:5_2}
 \end{figure}
 
@@ -420,7 +420,7 @@ Recall from Section \ref{section05_2_5} that \textsc{Component3} relates to sema
 The final model of LDL measures only was fitted with effects of the following variables: \textsc{l1norm}, \textsc{ALC}, \textsc{NNC}, log-transformed base duration (\textsc{baseDurLog}), pause (\textsc{pauseBin}), following segmental type (\textsc{folType}), and preceding consonant (\textsc{preC}). The \textsc{speaker} variable was included as random intercept. The \textit{p}-values of the analysis of variance of the final model are given in Table \ref{tab:5.10}.
 
 \begin{table}\fontsize{10}{11}
-\caption{\textit{p}-values of fixed effects in model C, fitted to the log-transformed durations of /s/}
+\caption{\textit{p}-values of fixed effects in model C, fitted to the log-transformed durations of /s/.}
 \label{tab:5.10}
 \centering
 \begin{tabular}{lrrrrrr} 
@@ -438,12 +438,12 @@ The final model of LDL measures only was fitted with effects of the following va
 \end{tabular}
 \end{table}
 
-With a marginal R\textsuperscript{2} value of $0.41$, the fixed effects of this model explain 41 \% of variation within the data. The conditional R\textsuperscript{2} value of the model is $0.61$, that is the complete model accounts for 61 \% of variation.
+With a marginal R\textsuperscript{2} value of $0.41$, the fixed effects of this model explain 41\% of variation within the data. The conditional R\textsuperscript{2} value of the model is $0.61$, that is the complete model accounts for 61\% of variation.
 
 The coefficients of the final model and their \textit{p}-values are given in Table \ref{tab:5.11}. The reference levels for the categorical covariates are: for \textsc{pauseBin} it is \texttt{no\_pause}; for \textsc{folType} it is \texttt{APP}, and for \textsc{preC} it is \texttt{f}.
 
 \begin{table}\fontsize{10}{11}
-\caption{Fixed-effect coefficients and \textit{p}-values as computed for model C (mixed-effects model fitted to the log-transformed duration of /s/)}
+\caption{Fixed-effect coefficients and \textit{p}-values as computed for model C (mixed-effects model fitted to the log-transformed duration of /s/).}
 \label{tab:5.11}
 \centering
 \begin{tabular}{lrrrrr} 
@@ -478,7 +478,7 @@ Figure \ref{fig:5_3} displays the effect on /s/ duration of the numerical variab
 \begin{figure}
     \centering
     \includegraphics[]{figures/fig5.3.pdf}
-    \caption{Partial effects of the numerical variables \textsc{l1norm} (Panel A), \textsc{baseDurLog} (back-transformed, Panel B), \textsc{ALC} (Panel C), and \textsc{NNC} (Panel D) included in model C, fitted to the log-transformed values of duration of /s/}
+    \caption{Partial effects of the numerical variables \textsc{l1norm} (Panel A), \textsc{baseDurLog} (back-transformed, Panel B), \textsc{ALC} (Panel C), and \textsc{NNC} (Panel D) included in model C, fitted to the log-transformed values of duration of /s/.}
     \label{fig:5_3}
 \end{figure}
 
@@ -487,7 +487,7 @@ Figure \ref{fig:5_4} shows the effect on /s/ duration of the categorical variabl
 \begin{figure}
     \centering
     \includegraphics[]{figures/fig5.4.pdf}
-    \caption{Partial effects of the categorical variables \textsc{pauseBin} (Panel A), \textsc{folType} (Panel B), and \textsc{preC} (Panel C) included in model C, fitted to the log-transformed values of duration of /s/}
+    \caption{Partial effects of the categorical variables \textsc{pauseBin} (Panel A), \textsc{folType} (Panel B), and \textsc{preC} (Panel C) included in model C, fitted to the log-transformed values of duration of /s/.}
     \label{fig:5_4}
 \end{figure}
 
@@ -499,7 +499,7 @@ The production study presented in Chapter \ref{chapter04} of this book as well a
 
 The predictive possibilities of LDL measures were explored by fitting three different models: a) a model based on the traditional predictors as used in previous studies (\cite{Plag2017,,Tomaschek2019}) and most importantly in the production study reported in this book; b) a model with LDL measures and a variable \textsc{typeOfS} specifying the presence or absence of an affix; and c) a model with LDL measures but without a variable specifying the presence or absence of an affix. Both models with LDL measures show that such measures are predictive of /s/ durations. This result is the most important of the present study. While traditional variables such as lexical frequencies, bigram frequencies, transitional probabilities, or neighbourhood densities measure important lexical properties, it is unclear why they would manifest themselves in a particular morphological effect in speech production. In LDL such effects can emerge through the mapping of form and meaning in a clearly defined process of discriminative learning.
 
-All regression models showed a similar hierarchy of predictor strength for the variables included in the models. For the traditional model A, \textsc{typeOfS} is the third-strongest predictor of /s/ duration and for model B this spot is taken by \textsc{Component3}, while there is no comparable variable included in model C. Comparing the variance explained by the fixed effects of the different models, one finds that the traditional model accounts for most variation, i.e. 43 \%, while the LDL model including the \textsc{typeOfS} variable accounts for 42 \%, and the LDL model without the \textsc{typeOfS} variable accounts for 41 \% of variation. Thus, in terms of marginal R\textsuperscript{2} values, all three models are close to each other. To check whether these differences in marginal R\textsuperscript{2} values are of significance, the three models were refitted to the untrimmed data set and then compared with a likelihood-ratio test. The results suggest that there is no significant difference between the traditional model and the LDL model including the \textsc{typeOfS} variable. However, the LDL model without the \textsc{typeOfS} variable shows a significantly worse fit ($p<0.01$). This seems to indicate that the LDL measures do not capture the full amount of the variance that is captured by the variable \textsc{typeOfS}. This means that there is still something about the morphological function that translates into duration and that is not properly modelled by the associative measurements of the learning network. The same problem holds, incidentally, for the traditional model (model A), in which the usual lexical measures (such as lexical frequencies, neighbourhood densities, etc.) and phonetic covariates (such as pauses, speech rate, etc.) are also not able to cover all durational variance. The morphological residue in both types of analysis remains a conundrum that calls for more sophisticated approaches in future research.
+All regression models showed a similar hierarchy of predictor strength for the variables included in the models. For the traditional model A, \textsc{typeOfS} is the third-strongest predictor of /s/ duration and for model B this spot is taken by \textsc{Component3}, while there is no comparable variable included in model C. Comparing the variance explained by the fixed effects of the different models, one finds that the traditional model accounts for most variation, i.e. 43\%, while the LDL model including the \textsc{typeOfS} variable accounts for 42\%, and the LDL model without the \textsc{typeOfS} variable accounts for 41\% of variation. Thus, in terms of marginal R\textsuperscript{2} values, all three models are close to each other. To check whether these differences in marginal R\textsuperscript{2} values are of significance, the three models were refitted to the untrimmed data set and then compared with a likelihood-ratio test. The results suggest that there is no significant difference between the traditional model and the LDL model including the \textsc{typeOfS} variable. However, the LDL model without the \textsc{typeOfS} variable shows a significantly worse fit ($p<0.01$). This seems to indicate that the LDL measures do not capture the full amount of the variance that is captured by the variable \textsc{typeOfS}. This means that there is still something about the morphological function that translates into duration and that is not properly modelled by the associative measurements of the learning network. The same problem holds, incidentally, for the traditional model (model A), in which the usual lexical measures (such as lexical frequencies, neighbourhood densities, etc.) and phonetic covariates (such as pauses, speech rate, etc.) are also not able to cover all durational variance. The morphological residue in both types of analysis remains a conundrum that calls for more sophisticated approaches in future research.
 
 The LDL measures included in the final models are either concerned with semantic activation diversity (\textsc{Component3}, \textsc{ALC}, \& \textsc{density} in model B; \textsc{l1norm} \& \textsc{ALC} in model C), semantic similarity (\textsc{NNC} in model C) or with phonological certainty (\textsc{Component1} in model B).
 
