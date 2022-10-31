@@ -90,7 +90,7 @@ plural context              & \begin{tabular}[c]{@{}l@{}}mean of plural /s/ \\28
 
 Similar to the experiment in Chapter \ref{chapter07}, the number-decision task was conducted in OpenSesame using the \texttt{mousetrap} plugin for mouse-tracking (\cite{Kieslich2017}). First, participants were introduced to the task at hand. They were told that in the following experiment they had to decide whether a sentence is about the action of two identical aliens, i.e. aliens of the same species and name, or about the action of one alien. They were told to mouse-click on the matching ``one" or ``two or more" button, respectively, in the top left and top right corner of the screen. Figure \ref{fig:8_1} illustrates what participants saw on screen for each trial. The participants were told that if they did not decide on either option within a certain amount of time, the next trial would start automatically. Each participant started with five practice trials.
 
-\begin{figure}
+\begin{figure}[b]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/fig8.1.png}
     \caption{Option display during the comprehension experiment. The mouse cursor indicates the position the mouse was reset to in each trial.}
@@ -110,9 +110,10 @@ The analysis of the present data is similar to the analysis of the mouse-trackin
     \label{fig:8_2}
 \end{figure}
 
+% \largerpage
 Then, X and Y coordinates were extracted using the \texttt{mtqgam} package (\cite{Schmitz2021mtqgam}). As in Section \ref{section07_2_3}, the sign of the coordinate data were reversed to allow for a straightforward interpretation. An example of the resulting data structure is given in Table \ref{tab:8.3}.
 
-\begin{table}\fontsize{9}{10}
+\begin{table}[b]\fontsize{9}{10}
 \caption{Example of the data format for a matched trial.}
 \label{tab:8.3}
 \centering
@@ -250,7 +251,7 @@ Random Smooth Terms & \textbf{~} & \textbf{~} & \textbf{~} & \textbf{~} & \textb
 
 \begin{figure}
     \centering
-    \includegraphics[]{figures/fig8.3.pdf}
+    \includegraphics[width=.9\textwidth]{figures/fig8.3.pdf}
     \caption{Effect of \textsc{condition} as found in the QGAMs modelled to the X and Y coordinates of \textsc{subset\textsubscript{IP}}. The lines indicate the confidence intervals of the estimated X and Y coordinate values.}
     \label{fig:8_3}
 \end{figure}
@@ -259,7 +260,9 @@ Random Smooth Terms & \textbf{~} & \textbf{~} & \textbf{~} & \textbf{~} & \textb
 
 For \textsc{subset\textsubscript{HP}}, the found effects are given in Table \ref{tab:8.7}. The effect of \textsc{condition} reaches significance in three QGAMs fitted to X coordinates, i.e. in the $\tau=0.1,0.7$ and $0.9$ quantiles. For Y coordinates, significant effects are found in all QGAMs but the QGAM fitted to the $\tau=0.9$ quantile. The effects are illustrated in Figure \ref{fig:8_4}. For X coordinates in $\tau=0.1$, the effect of \textsc{condition} leads to coordinates further to the right. Taking into account more data, the effect is reversed in $\tau=0.7$ and $0.9$, i.e. coordinates of mismatched trials are further left. The effect of \textsc{condition} on Y values is similar across all quantiles. That is, mismatched trials show further up Y coordinates.
 
-\begin{table}\fontsize{9}{10}
+\clearpage
+\begin{table}[p]
+\fontsize{9}{10}
 \caption{Summary of the effects found in the QGAMs fitted to the X and Y coordinates of \textsc{subset\textsubscript{HP}}. Significance codes: *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$.}
 \label{tab:8.7}
 \centering
@@ -286,18 +289,20 @@ Random Smooth Terms & \textbf{~} & \textbf{~} & \textbf{~} & \textbf{~} & \textb
 \end{tabular}
 \end{table}
 
-\begin{figure}
+\begin{figure}[p]
     \centering
-    \includegraphics[]{figures/fig8.4.pdf}
+    \includegraphics[width=.9\textwidth]{figures/fig8.4.pdf}
     \caption{Effect of \textsc{condition} as found in the QGAMs modelled to the X and Y coordinates of \textsc{subset\textsubscript{HP}}. The lines indicate the confidence intervals of the estimated X and Y coordinate values.}
     \label{fig:8_4}
 \end{figure}
+\clearpage
 
 \subsubsection{\textsc{subset\textsubscript{PI}}}\label{section08_2_2_3}
 
 Table \ref{tab:8.8} presents the effects found for QGAMs fitted to the \textsc{subset\textsubscript{PI}} data. A significant effect of \textsc{condition} is found in quantiles $\tau=0.1,0.3$ and $0.5$ for X coordinates, and in all quantiles but $\tau=0.1$ for Y coordinates. The effects are displayed in Figure \ref{fig:8_5}. Where the effect of \textsc{condition} is significant for X values, coordinates of mismatched trials are further right. For Y coordinates, the effect of \textsc{condition} comes with coordinates further down for mismatched trial coordinates.
 
-\begin{table}\fontsize{9}{10}
+\begin{table}[p]
+\fontsize{9}{10}
 \caption{Summary of the effects found in the QGAMs fitted to the X and Y coordinates of \textsc{subset\textsubscript{PI}}. Significance codes: *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$.}
 \label{tab:8.8}
 \centering
@@ -324,9 +329,9 @@ Random Smooth Terms & \textbf{~} & \textbf{~} & \textbf{~} & \textbf{~} & \textb
 \end{tabular}
 \end{table}
 
-\begin{figure}
+\begin{figure}[p]
     \centering
-    \includegraphics[]{figures/fig8.5.pdf}
+    \includegraphics[width=.9\textwidth]{figures/fig8.5.pdf}
     \caption{Effect of \textsc{condition} as found in the QGAMs modelled to the X and Y coordinates of \textsc{subset\textsubscript{PI}}. The lines indicate the confidence intervals of the estimated X and Y coordinate values.}
     \label{fig:8_5}
 \end{figure}
